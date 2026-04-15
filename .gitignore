@@ -13,3 +13,6 @@ build/
 Thumbs.db
 .vscode/
 *.log
+.agents
+skills-lock.json
+
