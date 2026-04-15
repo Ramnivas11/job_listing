@@ -1,5 +1,7 @@
 # Dependencies
 node_modules/
+agents
+skills-lock.json
 
 # Environment variables — never commit real secrets
 .env
