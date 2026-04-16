@@ -1,21 +1,16 @@
-import { Tray } from '@phosphor-icons/react';
+import { NewspaperClipping } from '@phosphor-icons/react';
 
-/**
- * EmptyState -- displayed when the API returns zero results.
- * Beautifully composed with guidance on how to populate data.
- */
 export default function EmptyState({ message }) {
   return (
-    <div className="flex flex-col items-center justify-center py-20 px-4" id="empty-state">
-      <div className="w-20 h-20 rounded-2xl bg-slate-100 border-2 border-dashed border-slate-200
-                      flex items-center justify-center mb-6">
-        <Tray size={36} weight="regular" className="text-slate-300" />
+    <div className="flex flex-col items-center justify-center p-16 md:p-24 border-[4px] border-black bg-white my-12" id="empty-state">
+      <div className="mb-8 bg-black text-[#F9F9F7] p-5">
+        <NewspaperClipping size={48} weight="light" />
       </div>
-      <h2 className="text-xl font-semibold text-slate-900 tracking-tight mb-1.5">
-        No jobs found
+      <h2 className="font-serif text-3xl sm:text-4xl font-black text-black uppercase tracking-tighter mb-4 text-center">
+        Edition Unavailable
       </h2>
-      <p className="text-sm text-slate-500 leading-relaxed max-w-[40ch] text-center">
-        {message || 'Try adjusting your search terms or clearing some filters to widen results.'}
+      <p className="font-mono text-xs sm:text-sm uppercase tracking-widest text-[#111111] max-w-[44ch] text-center leading-[1.8] font-bold border-t border-black pt-4">
+        {message || 'The specific criteria entered yielded no published records. Please broaden your inquiry and try again.'}
       </p>
     </div>
   );

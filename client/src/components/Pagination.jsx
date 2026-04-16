@@ -16,7 +16,6 @@ function getPageNumbers(currentPage, totalPages) {
 }
 
 export default function Pagination({ pagination, onPageChange }) {
-  /* Support both {totalPages} and {pages} field shapes */
   const {
     page,
     pages: totalPages,
@@ -34,70 +33,70 @@ export default function Pagination({ pagination, onPageChange }) {
 
   return (
     <nav
-      className="flex items-center justify-center gap-1.5 mt-10"
-      aria-label="Job listings pagination"
+      className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-0 mt-16 pt-8 border-t-4 border-black"
+      aria-label="Pagination"
       id="pagination"
     >
-      {/* Previous */}
-      <button
-        className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium
-                   border border-slate-200 bg-white text-slate-600
-                   transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]
-                   hover:bg-slate-50 hover:border-slate-300 active:scale-[0.96]
-                   disabled:opacity-35 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-slate-200"
-        disabled={!hasPrevPage}
-        onClick={() => onPageChange(page - 1)}
-        aria-label="Previous page"
-      >
-        <CaretLeft size={16} weight="bold" />
-        <span className="hidden sm:inline">Prev</span>
-      </button>
+      <div className="flex items-center gap-2">
+        {/* Previous */}
+        <button
+          className="flex items-center gap-2 h-12 px-4 font-mono text-sm font-bold uppercase tracking-widest
+                     border-2 border-black bg-white text-black
+                     hover:bg-black hover:text-white transition-colors sharp-corners
+                     disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-black"
+          disabled={!hasPrevPage}
+          onClick={() => onPageChange(page - 1)}
+          aria-label="Previous page"
+        >
+          <CaretLeft size={16} weight="bold" />
+          <span className="hidden sm:inline">Prev</span>
+        </button>
 
-      {/* Page numbers */}
-      {nums.map((p) => {
-        if (typeof p === 'string') {
+        {/* Page numbers */}
+        {nums.map((p) => {
+          if (typeof p === 'string') {
+            return (
+              <span key={p} className="w-12 h-12 flex items-center justify-center font-mono text-black font-bold">
+                ...
+              </span>
+            );
+          }
           return (
-            <span key={p} className="w-10 h-10 flex items-center justify-center text-sm text-slate-400">
-              ...
-            </span>
+            <button
+              key={p}
+              className={`w-12 h-12 flex items-center justify-center font-mono font-bold text-sm border-2 border-black sharp-corners transition-colors
+                          ${
+                            p === page
+                              ? 'bg-black text-white'
+                              : 'bg-white text-black hover:bg-neutral-200'
+                          }`}
+              onClick={() => onPageChange(p)}
+              aria-label={`Page ${p}`}
+              aria-current={p === page ? 'page' : undefined}
+            >
+              {p}
+            </button>
           );
-        }
-        return (
-          <button
-            key={p}
-            className={`w-10 h-10 flex items-center justify-center rounded-lg text-sm font-semibold
-                        transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.92]
-                        ${
-                          p === page
-                            ? 'bg-emerald-600 text-white shadow-[0_2px_8px_rgba(16,185,129,0.3)]'
-                            : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300'
-                        }`}
-            onClick={() => onPageChange(p)}
-            aria-label={`Page ${p}`}
-            aria-current={p === page ? 'page' : undefined}
-          >
-            {p}
-          </button>
-        );
-      })}
+        })}
 
-      {/* Next */}
-      <button
-        className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium
-                   border border-slate-200 bg-white text-slate-600
-                   transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]
-                   hover:bg-slate-50 hover:border-slate-300 active:scale-[0.96]
-                   disabled:opacity-35 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-slate-200"
-        disabled={!hasNextPage}
-        onClick={() => onPageChange(page + 1)}
-        aria-label="Next page"
-      >
-        <span className="hidden sm:inline">Next</span>
-        <CaretRight size={16} weight="bold" />
-      </button>
+        {/* Next */}
+        <button
+          className="flex items-center gap-2 h-12 px-4 font-mono text-sm font-bold uppercase tracking-widest
+                     border-2 border-black bg-white text-black
+                     hover:bg-black hover:text-white transition-colors sharp-corners
+                     disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-black"
+          disabled={!hasNextPage}
+          onClick={() => onPageChange(page + 1)}
+          aria-label="Next page"
+        >
+          <span className="hidden sm:inline">Next</span>
+          <CaretRight size={16} weight="bold" />
+        </button>
+      </div>
 
-      <span className="ml-4 text-xs text-slate-400 font-medium hidden md:inline whitespace-nowrap">
-        {startItem}&ndash;{endItem} of {total}
+      <span className="font-mono text-xs text-neutral-500 font-bold uppercase tracking-widest flex items-center gap-2">
+        Volume {startItem}&ndash;{endItem}
+        <span className="text-[#CC0000] border-l-2 border-black pl-2">Total {total}</span>
       </span>
     </nav>
   );

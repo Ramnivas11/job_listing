@@ -1,30 +1,25 @@
-/**
- * LoadingSpinner -- skeleton card loaders matching the 2-column grid layout.
- * Uses shimmer animation per skill Rule 5 (skeletal loaders, not generic spinners).
- */
-
 function SkeletonCard() {
   return (
-    <div className="bg-white border border-slate-200/60 rounded-2xl p-6 flex flex-col gap-3">
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex-1 space-y-2">
-          <div className="skeleton-shimmer h-5 w-3/5 rounded-md" />
-          <div className="skeleton-shimmer h-3.5 w-2/5 rounded-md" />
+    <div className="border-r-2 border-b-2 border-black bg-[#F9F9F7] p-6 sm:p-8 flex flex-col gap-6 sharp-corners animate-pulse">
+      <div className="flex justify-between gap-4 border-b border-black pb-4">
+        <div className="flex-1 space-y-4">
+          <div className="skeleton-shimmer h-8 w-3/4 border border-black" />
+          <div className="skeleton-shimmer h-4 w-1/3 border border-black" />
         </div>
-        <div className="skeleton-shimmer h-9 w-9 rounded-full flex-shrink-0" />
+        <div className="skeleton-shimmer h-12 w-12 border-2 border-black" />
       </div>
-      <div className="flex items-center gap-3">
-        <div className="skeleton-shimmer h-4 w-28 rounded-md" />
-        <div className="skeleton-shimmer h-5 w-20 rounded-full" />
+      <div className="flex gap-2">
+        <div className="skeleton-shimmer h-6 w-24 border border-black" />
+        <div className="skeleton-shimmer h-6 w-24 border border-black" />
       </div>
-      <div className="space-y-1.5">
-        <div className="skeleton-shimmer h-3.5 w-full rounded-md" />
-        <div className="skeleton-shimmer h-3.5 w-full rounded-md" />
-        <div className="skeleton-shimmer h-3.5 w-3/4 rounded-md" />
+      <div className="space-y-3">
+        <div className="skeleton-shimmer h-3 w-full border border-black" />
+        <div className="skeleton-shimmer h-3 w-full border border-black" />
+        <div className="skeleton-shimmer h-3 w-5/6 border border-black" />
       </div>
-      <div className="flex items-center justify-between pt-4 mt-auto border-t border-slate-100">
-        <div className="skeleton-shimmer h-6 w-24 rounded-md" />
-        <div className="skeleton-shimmer h-3.5 w-16 rounded-md" />
+      <div className="mt-auto border-t border-black pt-4 flex justify-between items-end">
+        <div className="skeleton-shimmer h-8 w-32 border border-black" />
+        <div className="skeleton-shimmer h-5 w-24 border border-black" />
       </div>
     </div>
   );
@@ -32,14 +27,14 @@ function SkeletonCard() {
 
 export default function LoadingSpinner() {
   return (
-    <div id="loading-state">
-      <div className="flex items-center gap-2.5 mb-6">
-        <div className="w-2 h-2 rounded-full bg-emerald-500 animate-breathe" />
-        <p className="text-sm text-slate-400 font-medium">Loading opportunities...</p>
+    <div id="loading-state" className="border-t-4 border-black pt-12">
+      <div className="flex items-center gap-3 mb-8">
+        <div className="w-4 h-4 bg-[#CC0000] border-2 border-black animate-breathe" />
+        <p className="font-mono text-sm uppercase tracking-widest font-bold text-black flex items-center">
+          Awaiting Transmission <span className="tracking-[3px] ml-1 text-base">...</span>
+        </p>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-        <SkeletonCard />
-        <SkeletonCard />
+      <div className="grid grid-cols-1 lg:grid-cols-2 border-l-2 border-t-2 border-black">
         <SkeletonCard />
         <SkeletonCard />
         <SkeletonCard />

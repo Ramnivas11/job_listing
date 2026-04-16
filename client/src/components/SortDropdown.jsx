@@ -1,27 +1,26 @@
 import { ArrowsDownUp, CaretDown } from '@phosphor-icons/react';
 
 const SORT_OPTIONS = [
-  { value: 'date_desc', label: 'Newest First' },
-  { value: 'date_asc', label: 'Oldest First' },
-  { value: 'salary_desc', label: 'Salary: High to Low' },
-  { value: 'salary_asc', label: 'Salary: Low to High' },
+  { value: 'date_desc', label: 'Newest Edition' },
+  { value: 'date_asc', label: 'Oldest Edition' },
+  { value: 'salary_desc', label: 'Highest Compensation' },
+  { value: 'salary_asc', label: 'Lowest Compensation' },
 ];
 
 export default function SortDropdown({ value, onChange }) {
   return (
-    <div className="relative min-w-0 flex-1">
+    <div className="relative min-w-0 flex-1 h-full">
       <ArrowsDownUp
-        className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
+        className="absolute left-3.5 top-1/2 -translate-y-1/2 text-black pointer-events-none"
         size={18}
+        weight="bold"
       />
       <select
         id="sort-select"
-        className="w-full pl-10 pr-9 py-3 bg-white border border-slate-200 rounded-xl
-                   text-slate-700 cursor-pointer
-                   focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500
-                   transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]
-                   shadow-[0_1px_3px_rgba(0,0,0,0.04)]
-                   text-sm font-medium"
+        className="w-full h-full min-h-[56px] pl-10 pr-9 py-4 bg-transparent border-none
+                   text-black cursor-pointer font-mono text-sm uppercase tracking-widest
+                   focus:outline-none focus:ring-0 focus:bg-[#E5E5E0]
+                   transition-colors duration-200 sharp-corners appearance-none"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         aria-label="Sort jobs"
@@ -33,7 +32,7 @@ export default function SortDropdown({ value, onChange }) {
         ))}
       </select>
       <CaretDown
-        className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
+        className="absolute right-3.5 top-1/2 -translate-y-1/2 text-black pointer-events-none"
         size={16}
         weight="bold"
       />

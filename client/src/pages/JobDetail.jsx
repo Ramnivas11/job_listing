@@ -6,7 +6,7 @@ import {
   MapPin,
   CalendarBlank,
   BookmarkSimple,
-  PaperPlaneTilt,
+  NewspaperClipping,
   CheckCircle,
   Briefcase,
   GraduationCap,
@@ -33,52 +33,20 @@ function formatDate(dateStr) {
   });
 }
 
-function getTypeBadge(type) {
-  const base =
-    'inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold ring-1 ring-inset';
-  switch (type) {
-    case 'Full-time':
-      return `${base} bg-emerald-50 text-emerald-700 ring-emerald-600/20`;
-    case 'Part-time':
-      return `${base} bg-amber-50 text-amber-700 ring-amber-600/20`;
-    case 'Remote':
-      return `${base} bg-sky-50 text-sky-700 ring-sky-600/20`;
-    default:
-      return `${base} bg-slate-50 text-slate-600 ring-slate-500/20`;
-  }
-}
-
-function getExperienceBadge(experience) {
-  const base =
-    'inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold ring-1 ring-inset';
-  switch (experience) {
-    case 'Entry-level':
-      return `${base} bg-violet-50 text-violet-700 ring-violet-600/20`;
-    case 'Mid-level':
-      return `${base} bg-blue-50 text-blue-700 ring-blue-600/20`;
-    case 'Senior':
-      return `${base} bg-orange-50 text-orange-700 ring-orange-600/20`;
-    case 'Lead':
-      return `${base} bg-rose-50 text-rose-700 ring-rose-600/20`;
-    default:
-      return `${base} bg-slate-50 text-slate-600 ring-slate-500/20`;
-  }
-}
-
 function DetailSkeleton() {
   return (
-    <div className="max-w-3xl mx-auto px-4 md:px-6 py-10 space-y-6">
-      <div className="skeleton-shimmer h-4 w-24 rounded-md" />
-      <div className="bg-white border border-slate-200/60 rounded-2xl p-8 space-y-5">
-        <div className="skeleton-shimmer h-7 w-2/3 rounded-md" />
-        <div className="skeleton-shimmer h-4 w-1/3 rounded-md" />
+    <div className="max-w-screen-lg mx-auto px-4 md:px-6 py-12 space-y-6">
+      <div className="skeleton-shimmer h-4 w-32 border border-black" />
+      <div className="border border-black bg-[#F9F9F7] p-8 space-y-5">
+        <div className="skeleton-shimmer h-12 w-2/3 border border-black" />
+        <div className="skeleton-shimmer h-6 w-1/3 border border-black" />
         <div className="flex gap-2">
-          <div className="skeleton-shimmer h-6 w-20 rounded-full" />
-          <div className="skeleton-shimmer h-6 w-20 rounded-full" />
+          <div className="skeleton-shimmer h-8 w-24 border border-black" />
+          <div className="skeleton-shimmer h-8 w-24 border border-black" />
         </div>
-        <div className="border-t border-slate-100 pt-5 space-y-2">
-          {[...Array(6)].map((_, i) => (
-            <div key={i} className="skeleton-shimmer h-4 rounded-md" style={{ width: `${85 - i * 5}%` }} />
+        <div className="border-t border-black pt-5 space-y-2">
+          {[...Array(8)].map((_, i) => (
+            <div key={i} className="skeleton-shimmer h-5 border border-black" style={{ width: `${95 - i * 5}%` }} />
           ))}
         </div>
       </div>
@@ -124,23 +92,9 @@ export default function JobDetail() {
 
     applyToJob(job._id);
 
-    toast.success(`Applied to ${job.title} at ${job.company}!`, {
+    toast.success(`Application registered: ${job.company}`, {
       duration: 4000,
       position: 'bottom-right',
-      style: {
-        background: '#ffffff',
-        color: '#0f172a',
-        border: '1px solid #e2e8f0',
-        borderRadius: '12px',
-        padding: '14px 18px',
-        fontSize: '14px',
-        fontWeight: '500',
-        boxShadow: '0 8px 24px rgba(0,0,0,0.08)',
-      },
-      iconTheme: {
-        primary: '#059669',
-        secondary: '#ffffff',
-      },
     });
 
     if (job.applyUrl) {
@@ -151,20 +105,9 @@ export default function JobDetail() {
   const handleSaveToggle = () => {
     const wasSaved = isSaved(job._id);
     toggleSave(job._id);
-    toast(wasSaved ? 'Removed from saved jobs' : 'Saved to your list', {
+    toast(wasSaved ? 'Dossier Removed' : 'Dossier Saved', {
       duration: 2500,
       position: 'bottom-right',
-      icon: wasSaved ? '🔖' : '✓',
-      style: {
-        background: '#ffffff',
-        color: '#0f172a',
-        border: '1px solid #e2e8f0',
-        borderRadius: '12px',
-        padding: '12px 16px',
-        fontSize: '13px',
-        fontWeight: '500',
-        boxShadow: '0 4px_16px rgba(0,0,0,0.06)',
-      },
     });
   };
 
@@ -172,15 +115,14 @@ export default function JobDetail() {
 
   if (error) {
     return (
-      <div className="max-w-3xl mx-auto px-4 md:px-6 py-20 text-center">
-        <p className="text-slate-900 font-semibold text-lg mb-2">Could not load this job</p>
-        <p className="text-slate-500 text-sm mb-6">{error}</p>
+      <div className="max-w-screen-md mx-auto px-4 md:px-6 py-32 text-center border-x border-b border-black">
+        <p className="font-serif text-3xl font-black mb-4">Print Error</p>
+        <p className="font-body text-neutral-600 mb-8 max-w-sm mx-auto">{error}</p>
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 hover:text-emerald-700"
+          className="inline-flex items-center gap-2 font-sans uppercase text-xs font-bold tracking-widest text-[#111111] underline underline-offset-4 decoration-2 decoration-black hover:bg-black hover:text-[#F9F9F7] px-4 py-2 transition-all"
         >
-          <ArrowLeft size={16} />
-          Back to listings
+          &larr; Return to Index
         </Link>
       </div>
     );
@@ -189,153 +131,156 @@ export default function JobDetail() {
   if (!job) return null;
 
   return (
-    <div className="max-w-3xl mx-auto px-4 md:px-6 py-8 animate-card-enter">
+    <div className="max-w-screen-lg mx-auto px-4 md:px-6 py-12">
       {/* Back link */}
       <Link
         to="/"
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-500
-                   hover:text-slate-900 transition-colors duration-150 mb-6"
+        className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-[#111111] hover:bg-black hover:text-[#F9F9F7] px-3 py-2 transition-all border border-transparent border-b-black mb-8"
       >
-        <ArrowLeft size={16} />
-        All jobs
+        <ArrowLeft size={16} weight="bold" />
+        Return to Full Index
       </Link>
 
-      {/* Main card */}
-      <div className="bg-white border border-slate-200/60 rounded-2xl overflow-hidden
-                      shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
+      {/* Main Container - The "Article" */}
+      <article className="border-[3px] border-black bg-[#F9F9F7] relative">
+        <div className="newsprint-texture absolute inset-0 z-0 opacity-30 pointer-events-none"></div>
+        
         {/* Header */}
-        <div className="p-8 border-b border-slate-100">
-          <div className="flex items-start justify-between gap-4">
-            <div className="min-w-0">
-              <h1 className="text-2xl font-bold text-slate-900 tracking-tight leading-tight mb-1">
-                {job.title}
-              </h1>
-              <p className="text-base font-semibold text-emerald-600">{job.company}</p>
-            </div>
+        <header className="relative z-10 border-b-[3px] border-black p-8 md:p-12">
+          <div className="mb-4">
+            <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#CC0000] border-b-2 border-[#CC0000] pb-1">
+              {job.company}
+            </span>
+          </div>
+          
+          <div className="flex flex-col md:flex-row items-start justify-between gap-6 md:gap-12">
+            <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl font-black text-black leading-[0.9] tracking-tighter">
+              {job.title}
+            </h1>
+            
             <button
-              className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full
-                         border border-slate-200 bg-white
-                         transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]
-                         hover:bg-slate-50 hover:border-slate-300 active:scale-[0.92]"
+              className="md:mt-2 flex-shrink-0 w-16 h-16 flex items-center justify-center border-[3px] border-black bg-transparent
+                         transition-colors duration-200 hover:bg-black group/btn sharp-corners"
               onClick={handleSaveToggle}
               aria-label={isSaved(job._id) ? 'Remove from saved' : 'Save this job'}
             >
               <BookmarkSimple
-                size={20}
-                weight={isSaved(job._id) ? 'fill' : 'regular'}
-                className={isSaved(job._id) ? 'text-emerald-600' : 'text-slate-400'}
+                size={28}
+                weight={isSaved(job._id) ? 'fill' : 'bold'}
+                className={`transition-colors ${isSaved(job._id) ? 'text-[#CC0000]' : 'text-black group-hover/btn:text-[#F9F9F7]'}`}
               />
             </button>
           </div>
-
-          {/* Badges */}
-          <div className="flex flex-wrap items-center gap-2 mt-4">
-            <span className="flex items-center gap-1.5 text-sm text-slate-500">
-              <MapPin size={15} className="text-slate-400" />
+          
+          {/* Top-level Meta */}
+          <div className="flex flex-wrap items-center gap-3 mt-10 font-mono text-xs uppercase tracking-widest font-semibold">
+            <span className="border-2 border-black px-3 py-1.5 flex items-center gap-2 bg-[#111111] text-[#F9F9F7]">
+              <MapPin size={16} weight="bold" />
               {job.location}
             </span>
-            <span className={getTypeBadge(job.type)}>{job.type}</span>
-            {job.experience && (
-              <span className={getExperienceBadge(job.experience)}>{job.experience}</span>
-            )}
+            <span className="border-2 border-black px-3 py-1.5 bg-white text-black">{job.type}</span>
+            <span className="flex items-center gap-2 px-3 py-1.5 ml-auto text-neutral-500">
+              <CalendarBlank size={16} weight="bold" />
+              Published: {formatDate(job.createdAt)}
+            </span>
+          </div>
+        </header>
+
+        {/* Info Grid */}
+        <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 border-b-2 border-black">
+          <div className="p-6 md:p-8 border-b md:border-b-0 md:border-r border-black">
+            <span className="block font-mono text-xs uppercase tracking-widest text-neutral-500 mb-2">Compensation</span>
+            <div className="font-sans text-2xl md:text-3xl font-black text-black">{formatSalary(job.salary)} <span className="text-sm font-bold text-neutral-400">/yr</span></div>
+          </div>
+          <div className="p-6 md:p-8 border-b md:border-b-0 md:border-r border-black">
+            <span className="block font-mono text-xs uppercase tracking-widest text-neutral-500 mb-2">Role Type</span>
+            <div className="font-serif text-xl md:text-2xl font-bold text-black">{job.type}</div>
+          </div>
+          <div className="p-6 md:p-8">
+            <span className="block font-mono text-xs uppercase tracking-widest text-neutral-500 mb-2">Seniority</span>
+            <div className="font-serif text-xl md:text-2xl font-bold text-black">{job.experience || 'Not Specified'}</div>
           </div>
         </div>
 
-        {/* Metadata grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-0 divide-x divide-y divide-slate-100 border-b border-slate-100">
-          <div className="flex flex-col p-5 gap-1">
-            <span className="flex items-center gap-1.5 text-xs font-semibold text-slate-400 uppercase tracking-wider">
-              <CurrencyDollar size={14} /> Salary
-            </span>
-            <span className="text-lg font-bold text-emerald-600 tracking-tight">
-              {formatSalary(job.salary)}
-            </span>
-            <span className="text-xs text-slate-400">per year</span>
-          </div>
-          <div className="flex flex-col p-5 gap-1">
-            <span className="flex items-center gap-1.5 text-xs font-semibold text-slate-400 uppercase tracking-wider">
-              <Briefcase size={14} /> Type
-            </span>
-            <span className="text-sm font-semibold text-slate-900">{job.type}</span>
-          </div>
-          <div className="flex flex-col p-5 gap-1">
-            <span className="flex items-center gap-1.5 text-xs font-semibold text-slate-400 uppercase tracking-wider">
-              <GraduationCap size={14} /> Experience
-            </span>
-            <span className="text-sm font-semibold text-slate-900">{job.experience || '—'}</span>
-          </div>
-          <div className="col-span-2 sm:col-span-3 flex flex-col p-5 gap-1">
-            <span className="flex items-center gap-1.5 text-xs font-semibold text-slate-400 uppercase tracking-wider">
-              <CalendarBlank size={14} /> Posted
-            </span>
-            <span className="text-sm font-semibold text-slate-900">{formatDate(job.createdAt)}</span>
-          </div>
-        </div>
-
-        {/* Skills */}
-        {job.skills && job.skills.length > 0 && (
-          <div className="p-8 border-b border-slate-100">
-            <h2 className="flex items-center gap-1.5 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
-              <Tag size={14} />
-              Skills Required
+        {/* Content Section */}
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12">
+          {/* Main Description */}
+          <div className="lg:col-span-8 p-8 md:p-12 lg:border-r-2 border-black">
+            <h2 className="font-sans text-xl font-black uppercase tracking-tight border-b-4 border-black inline-block mb-8">
+              Role Abstract
             </h2>
-            <div className="flex flex-wrap gap-2">
-              {job.skills.map((skill) => (
-                <span
-                  key={skill}
-                  className="px-3 py-1 bg-slate-50 border border-slate-200 rounded-lg
-                             text-sm text-slate-700 font-medium"
-                >
-                  {skill}
-                </span>
-              ))}
+            <div className="font-body text-base sm:text-lg text-black leading-[1.8] text-justify">
+               {/* Drop cap effect applied to the first letter of the description */}
+               <span className="float-left text-7xl font-serif font-black leading-[0.8] pr-3 pt-2 text-black">
+                {job.description.charAt(0)}
+               </span>
+               {job.description.slice(1)}
+            </div>
+            
+            {/* Action Area */}
+            <div className="mt-16 pt-12 border-t-2 border-black">
+              <p className="font-mono text-xs uppercase tracking-widest font-bold mb-6">
+                {applied ? 'Application Processed' : 'Formal Action Required'}
+              </p>
+              <button
+                id="apply-button"
+                disabled={applied}
+                onClick={handleApply}
+                className={`w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 
+                            font-mono text-sm font-bold uppercase tracking-widest border-[3px]
+                            transition-colors duration-200 sharp-corners
+                            ${
+                              applied
+                                ? 'bg-neutral-200 border-neutral-400 text-neutral-500 cursor-not-allowed'
+                                : 'bg-[#CC0000] border-[#CC0000] text-white hover:bg-black hover:border-black hover:text-[#F9F9F7]'
+                            }`}
+              >
+                {applied ? (
+                  <>
+                    <CheckCircle size={20} weight="bold" />
+                    Dossier Submitted
+                  </>
+                ) : (
+                  <>
+                    <NewspaperClipping size={20} weight="bold" />
+                    Submit Application
+                  </>
+                )}
+              </button>
             </div>
           </div>
-        )}
 
-        {/* Description */}
-        <div className="p-8 border-b border-slate-100">
-          <h2 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
-            Job Description
-          </h2>
-          <p className="text-slate-600 leading-relaxed text-[0.95rem]">{job.description}</p>
-        </div>
-
-        {/* Apply section */}
-        <div className="p-8 flex items-center justify-between gap-4 flex-wrap">
-          <p className="text-sm text-slate-500">
-            {applied
-              ? 'Your application has been recorded.'
-              : 'Ready to take the next step?'}
-          </p>
-          <button
-            id="apply-button"
-            disabled={applied}
-            onClick={handleApply}
-            className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold
-                        transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]
-                        active:scale-[0.96]
-                        ${
-                          applied
-                            ? 'bg-slate-100 text-slate-500 cursor-not-allowed'
-                            : 'bg-emerald-600 text-white hover:bg-emerald-700 hover:shadow-[0_4px_12px_rgba(16,185,129,0.3)] active:-translate-y-[1px]'
-                        }`}
-            aria-label={applied ? 'Already applied to this job' : 'Apply to this job'}
-          >
-            {applied ? (
-              <>
-                <CheckCircle size={18} weight="fill" />
-                Already Applied
-              </>
+          {/* Sidebar */}
+          <aside className="lg:col-span-4 p-8 md:p-12 border-t-2 lg:border-t-0 border-black bg-white">
+            <h3 className="font-sans text-sm font-black uppercase tracking-widest text-[#CC0000] mb-6 flex items-center gap-2">
+              <Tag size={16} weight="bold" />
+              Required Competencies
+            </h3>
+            
+            {job.skills && job.skills.length > 0 ? (
+               <ul className="flex flex-col gap-0 border-t border-black">
+                {job.skills.map((skill) => (
+                  <li
+                    key={skill}
+                    className="py-3 px-1 font-mono text-sm font-bold uppercase tracking-widest text-black border-b border-black"
+                  >
+                    {skill}
+                  </li>
+                ))}
+              </ul>
             ) : (
-              <>
-                <PaperPlaneTilt size={18} weight="bold" />
-                Apply Now
-              </>
+              <p className="font-body text-neutral-500 italic">No specific competencies listed.</p>
             )}
-          </button>
+            
+            <div className="mt-16 p-6 border-2 border-black bg-[#111111] text-[#F9F9F7]">
+               <h4 className="font-serif text-xl font-bold mb-4">About {job.company}</h4>
+               <p className="font-sans text-sm leading-relaxed text-neutral-300">
+                 An independent entity seeking qualified individuals. Thorough background checks may be conducted. 
+               </p>
+            </div>
+          </aside>
         </div>
-      </div>
+      </article>
     </div>
   );
 }
